@@ -1,4 +1,4 @@
-/* Dijkstra's Algorithm in C */
+/* Dijkstra's Shortest Path Algorithm in C */
 #include<stdio.h>
 #include<conio.h>
 #include<process.h>
