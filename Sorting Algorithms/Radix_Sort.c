@@ -29,7 +29,7 @@ void Count_Sort(int *arr,int size,int position){
     for(i=size-1;i>=0;i--){
         output[aux_arr[(arr[i]/(div))%10]-1]=arr[i];
          aux_arr[(arr[i]/(div))%10]--; // we use reverse order because next element with same
-                                         // digit and ame place will be put after present element
+                                         // digit and same place will be put after present element
     }                                       // with same digit at a given place.
      for (i = 0; i < size; i++) 
         arr[i] = output[i];
