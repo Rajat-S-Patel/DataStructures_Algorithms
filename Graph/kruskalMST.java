@@ -1,5 +1,4 @@
 import java.util.*;
-// Warning: Printing unwanted or ill-formatted data to output will cause the test cases to fail
 
 public class kruskalMST {
     public static void main(String args[]) throws Exception {
