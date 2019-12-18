@@ -24,10 +24,10 @@ public class LongestCommonSubsequence {
         String s1=sc.nextLine();
         String s2=sc.nextLine();
 
-        System.out.println("Number of Longest Common Subsequences Bottom up approach :  ");
+        System.out.println("Length of Longest Common Subsequences Bottom up approach :  ");
         System.out.println(LCSBottomUp(s1,s2));
         int dp[][]=new int[s1.length()+1][s2.length()+1];
-        System.out.println("Number of Longest Common Subsequences Top down approach :  ");
+        System.out.println("Length of Longest Common Subsequences Top down approach :  ");
         System.out.println(LCSTopDown(s1, s2, dp,s1.length(),s2.length()));
     }
    
