@@ -29,8 +29,66 @@ public class LongestCommonSubsequence {
         int dp[][]=new int[s1.length()+1][s2.length()+1];
         System.out.println("Length of Longest Common Subsequences Top down approach :  ");
         System.out.println(LCSTopDown(s1, s2, dp,s1.length(),s2.length()));
+
+        System.out.println("LCS : "+getLCS(s1,s2,s1.length(),s2.length(),dp));
+        System.out.println("All LCS : ");
+        List<String> allLcs=getAllLCS(s1, s2, s1.length(), s2.length(), dp);
+        for(String s:allLcs){
+            System.out.println(s);
+        }
     }
-   
+
+    // Returns Single String as an LCS
+    private static String getLCS(String s1,String s2,int m,int n,int dp[][]){
+        if(m==0||n==0){
+            return new String();
+        }
+        // If both have same last character then append that character in resulting string.
+        if(s1.charAt(m-1)==s2.charAt(n-1)){
+            return getLCS(s1, s2, m-1, n-1, dp)+ s1.charAt(m-1);    
+        }
+        // If last length String by dropping (m-1)th character is more than using (n-1)th character,
+        //then drop (m-1)th character.
+        if(dp[m-1][n]>dp[m][n-1]){
+            return getLCS(s1, s2, m-1, n, dp);
+        }
+        // else drop (n-1)th character in LCS
+        else{
+            return getLCS(s1, s2, m, n-1, dp);
+        }
+    }
+    // Above method ignores LCS when both string have different last characters and same lcs possibilities.
+    // To get All lcs we will include both lcs if they have different characters and still they can make
+    // same length lcs i.e when dp[m-1][n]==dp[m][n-1]
+    
+    private static List<String> getAllLCS(String s1,String s2,int m,int n,int dp[][]){
+            if(n==0||m==0){
+                // return list with 1 empty string.
+                return new ArrayList<>(Collections.nCopies(1,""));
+            }
+            if(s1.charAt(m-1)==s2.charAt(n-1)){
+                List<String> lcs= getAllLCS(s1, s2, m-1, n-1, dp);
+
+                for(int i=0;i<lcs.size();i++){
+                    lcs.set(i,lcs.get(i)+s1.charAt(m-1));
+                }
+
+                return lcs;
+            }
+            if(dp[m-1][n]>dp[m][n-1]){
+                return getAllLCS(s1, s2, m-1, n, dp);
+            }
+            if(dp[m][n-1]>dp[m-1][n]){
+                return getAllLCS(s1, s2, m, n-1, dp);
+            }
+
+            List<String> topLcs=getAllLCS(s1, s2, m-1, n, dp);
+            List<String> leftLcs=getAllLCS(s1, s2, m, n-1, dp);
+
+            topLcs.addAll(leftLcs);
+            return topLcs;
+
+    }
     private static int LCSBottomUp(String s1,String s2){
         int n=s1.length();
         int m=s2.length();
